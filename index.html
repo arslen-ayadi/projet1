@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>أرسلان عيادي | مصمم واجهات أمامية</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Cairo", sans-serif;
+        background-color: #f4f9ff;
+        color: #0a0f2c;
+        scroll-behavior: smooth;
+        font-size: 28px;
+        transition: background 0.5s, color 0.5s;
+        direction: rtl;
+      }
+      header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background-color: #fff;
+        padding: 40px 60px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 1000;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
+        font-size: 30px;
+        transition: background-color 0.5s, box-shadow 0.5s;
+        flex-wrap: wrap;
+      }
+      .logo {
+        font-size: 36px;
+        font-weight: bold;
+        color: #0077b6;
+        transition: color 0.5s;
+      }
+      nav {
+        display: flex;
+        gap: 35px;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+      }
+      nav a {
+        color: #0a0f2c;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 26px;
+        transition: color 0.3s;
+      }
+      nav a:hover {
+        color: #0077b6;
+      }
+      #lang-btn {
+        background-color: #00a896;
+        color: white;
+        border: none;
+        padding: 10px 25px;
+        border-radius: 12px;
+        font-size: 20px;
+        cursor: pointer;
+        transition: background-color 0.5s;
+        margin-top: 10px;
+      }
+      #tsparticles {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        top: 0;
+        left: 0;
+      }
+      .hero {
+        padding-top: 240px;
+        padding-bottom: 180px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 80px;
+        flex-wrap: wrap;
+        text-align: right;
+      }
+      .hero img {
+        width: 380px;
+        max-width: 100%;
+        border-radius: 20px;
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.5s;
+      }
+      .hero-text {
+        max-width: 600px;
+        text-align: right;
+        opacity: 0;
+        transform: translateX(50px);
+        transition: opacity 1s ease, transform 1s ease;
+      }
+      .hero-text.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      .hero h1 {
+        font-size: 56px;
+        margin-bottom: 30px;
+        color: #0077b6;
+        transition: color 0.5s;
+      }
+      .hero p {
+        font-size: 30px;
+        line-height: 2;
+        transition: color 0.5s;
+      }
+      section {
+        padding: 120px 40px;
+        text-align: center;
+        font-size: 30px;
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 1s ease, transform 1s ease;
+      }
+      section.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      h2 {
+        font-size: 48px;
+        margin-bottom: 40px;
+        color: #00a896;
+        transition: color 0.5s;
+      }
+      .skills {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 40px;
+      }
+      .skill {
+        background-color: #fff;
+        padding: 40px 50px;
+        border-radius: 16px;
+        min-width: 200px;
+        font-size: 26px;
+        font-weight: bold;
+        color: #0a0f2c;
+        box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s, background-color 0.5s, color 0.5s;
+        cursor: default;
+      }
+      .skill:hover {
+        transform: scale(1.08);
+      }
+      form#contact-form {
+        max-width: 600px;
+        margin: 0 auto;
+        text-align: right;
+        font-size: 24px;
+        color: #0a0f2c;
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 1s ease, transform 1s ease;
+      }
+      form#contact-form.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      form#contact-form label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        transition: color 0.5s;
+      }
+      form#contact-form input,
+      form#contact-form textarea {
+        width: 100%;
+        padding: 12px 15px;
+        margin-bottom: 25px;
+        border: 2px solid #0077b6;
+        border-radius: 12px;
+        font-size: 22px;
+        font-family: "Cairo", sans-serif;
+        resize: vertical;
+        transition: border-color 0.3s, background-color 0.5s, color 0.5s;
+      }
+      form#contact-form input:focus,
+      form#contact-form textarea:focus {
+        border-color: #00a896;
+        outline: none;
+      }
+      form#contact-form button {
+        background-color: #0077b6;
+        color: white;
+        padding: 15px 40px;
+        border: none;
+        border-radius: 25px;
+        font-size: 26px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      form#contact-form button:hover {
+        background-color: #005f87;
+      }
+      footer {
+        background-color: #e3f2fd;
+        text-align: center;
+        padding: 40px;
+        font-size: 24px;
+        color: #444;
+        transition: background-color 0.5s, color 0.5s;
+      }
+
+      @media (max-width: 768px) {
+        body {
+          font-size: 20px;
+        }
+        header {
+          padding: 20px 30px;
+          font-size: 26px;
+          justify-content: center;
+        }
+        nav {
+          gap: 20px;
+        }
+        .hero {
+          flex-direction: column-reverse;
+          padding-top: 180px;
+          padding-bottom: 80px;
+          text-align: center;
+        }
+        .hero-text {
+          max-width: 100%;
+          transform: translateX(0);
+          opacity: 1;
+        }
+        .hero h1 {
+          font-size: 42px;
+        }
+        .hero p {
+          font-size: 22px;
+          line-height: 1.6;
+        }
+        .hero img {
+          width: 80%;
+          max-width: 300px;
+          box-shadow: none;
+          margin-bottom: 20px;
+        }
+        section {
+          padding: 60px 20px;
+          font-size: 20px;
+        }
+        h2 {
+          font-size: 32px;
+          margin-bottom: 25px;
+        }
+        .skills {
+          gap: 20px;
+        }
+        .skill {
+          padding: 20px 25px;
+          font-size: 20px;
+          min-width: 150px;
+        }
+        form#contact-form {
+          font-size: 18px;
+        }
+        form#contact-form input,
+        form#contact-form textarea {
+          font-size: 18px;
+          padding: 10px 12px;
+        }
+        form#contact-form button {
+          font-size: 22px;
+          padding: 12px 30px;
+        }
+        footer {
+          font-size: 18px;
+          padding: 25px 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="tsparticles"></div>
+
+    <header>
+      <div class="logo" id="logo">أرسلان عيادي</div>
+      <nav>
+        <a href="#home" id="nav-home">الرئيسية</a>
+        <a href="#about" id="nav-about">من أكون</a>
+        <a href="#skills" id="nav-skills">مهاراتي</a>
+        <a href="#contact" id="nav-contact">تواصل معي</a>
+      </nav>
+      <button id="lang-btn">English</button>
+    </header>
+
+    <section class="hero" id="home">
+      <div class="hero-text">
+        <h1 id="hero-title">مرحباً! 👋</h1>
+        <p id="hero-desc">
+          أنا أرسلان، مطور ومصمم واجهات أمامية شغوف بعالم الويب. أعمل على تصميم
+          مواقع تفاعلية وأنيقة باستخدام تقنيات حديثة.
+        </p>
+      </div>
+      <img src="raslen.png" alt="صورة أرسلان" />
+    </section>
+
+    <section id="about">
+      <h2 id="about-title">من أكون؟</h2>
+      <p id="about-desc">
+        أنا أرسلان عيادي. لدي خبرة في البرمجة منذ سنتين وعندي شغف كبير بتصميم
+        الواجهات التفاعلية والعصرية. أحب خلق تجارب استخدام بسيطة وجذابة حيث
+        أشتغل بلغات مثل HTML و CSS و JavaScript، هذا إلى جانب Wordpress.
+      </p>
+    </section>
+
+    <section id="skills">
+      <h2 id="skills-title">المهارات</h2>
+      <div class="skills">
+        <div class="skill">HTML5</div>
+        <div class="skill">CSS3</div>
+        <div class="skill">JavaScript</div>
+        <div class="skill">Responsive Design</div>
+        <div class="skill">Git & GitHub</div>
+        <div class="skill">tsParticles</div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <h2 id="contact-title">تواصل معي</h2>
+      <form
+        id="contact-form"
+        action="https://formsubmit.co/arsalenayedi9@gmail.com"
+        method="POST"
+        novalidate
+      >
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_template" value="box" />
+
+        <label for="name" id="label-name">الاسم واللقب</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="أدخل اسمك الكامل"
+          required
+        />
+
+        <label for="email" id="label-email">البريد الإلكتروني</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="example@mail.com"
+          required
+        />
+
+        <label for="message" id="label-message">رسالتك</label>
+        <textarea
+          id="message"
+          name="message"
+          rows="5"
+          placeholder="اكتب رسالتك هنا..."
+          required
+        ></textarea>
+
+        <button type="submit" id="submit-btn">إرسال</button>
+      </form>
+    </section>
+
+    <footer id="footer-text">© 2025 أرسلان عيادي - جميع الحقوق محفوظة</footer>
+
+    <script>
+      const translations = {
+        en: {
+          logo: "Arslen Ayadi",
+          nav: ["Home", "About", "Skills", "Contact"],
+          heroTitle: "Hello! 👋",
+          heroDesc:
+            "I’m Arslen, a passionate front-end developer and designer. I build elegant and interactive websites using modern technologies.",
+          aboutTitle: "Who am I?",
+          aboutDesc:
+            "I am Arslen Ayadi. I have two years of programming experience and a great passion for designing modern and interactive interfaces. I love creating simple and attractive user experiences using languages like HTML, CSS, and JavaScript, alongside Wordpress.",
+          skillsTitle: "Skills",
+          contactTitle: "Contact Me",
+          footer: "© 2025 Arslen Ayadi - All rights reserved",
+          button: "العربية",
+          nameLabel: "Name & Surname",
+          namePlaceholder: "Enter your full name",
+          emailLabel: "Email",
+          emailPlaceholder: "example@mail.com",
+          messageLabel: "Your message",
+          messagePlaceholder: "Write your message here...",
+          submitBtn: "Send",
+        },
+        ar: {
+          logo: "أرسلان عيادي",
+          nav: ["الرئيسية", "من أكون", "مهاراتي", "تواصل معي"],
+          heroTitle: "مرحباً! 👋",
+          heroDesc:
+            "أنا أرسلان، مطور ومصمم واجهات أمامية شغوف بعالم الويب. أعمل على تصميم مواقع تفاعلية وأنيقة باستخدام تقنيات حديثة.",
+          aboutTitle: "من أكون؟",
+          aboutDesc:
+            "أنا أرسلان عيادي. لدي خبرة في البرمجة منذ سنتين وعندي شغف كبير بتصميم الواجهات التفاعلية والعصرية. أحب خلق تجارب استخدام بسيطة وجذابة حيث أشتغل بلغات مثل HTML و CSS و JavaScript، هذا إلى جانب Wordpress.",
+          skillsTitle: "المهارات",
+          contactTitle: "تواصل معي",
+          footer: "© 2025 أرسلان عيادي - جميع الحقوق محفوظة",
+          button: "English",
+          nameLabel: "الاسم واللقب",
+          namePlaceholder: "أدخل اسمك الكامل",
+          emailLabel: "البريد الإلكتروني",
+          emailPlaceholder: "example@mail.com",
+          messageLabel: "رسالتك",
+          messagePlaceholder: "اكتب رسالتك هنا...",
+          submitBtn: "إرسال",
+        },
+      };
+
+      let currentLang = "ar";
+
+      function updateLanguage(lang) {
+        const t = translations[lang];
+        document.documentElement.lang = lang;
+        document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+
+        document.getElementById("logo").textContent = t.logo;
+        document.getElementById("nav-home").textContent = t.nav[0];
+        document.getElementById("nav-about").textContent = t.nav[1];
+        document.getElementById("nav-skills").textContent = t.nav[2];
+        document.getElementById("nav-contact").textContent = t.nav[3];
+        document.getElementById("hero-title").textContent = t.heroTitle;
+        document.getElementById("hero-desc").textContent = t.heroDesc;
+        document.getElementById("about-title").textContent = t.aboutTitle;
+        document.getElementById("about-desc").textContent = t.aboutDesc;
+        document.getElementById("skills-title").textContent = t.skillsTitle;
+        document.getElementById("contact-title").textContent = t.contactTitle;
+        document.getElementById("footer-text").textContent = t.footer;
+        document.getElementById("lang-btn").textContent = t.button;
+        document.getElementById("label-name").textContent = t.nameLabel;
+        document.getElementById("name").placeholder = t.namePlaceholder;
+        document.getElementById("label-email").textContent = t.emailLabel;
+        document.getElementById("email").placeholder = t.emailPlaceholder;
+        document.getElementById("label-message").textContent = t.messageLabel;
+        document.getElementById("message").placeholder = t.messagePlaceholder;
+        document.getElementById("submit-btn").textContent = t.submitBtn;
+      }
+
+      document.getElementById("lang-btn").addEventListener("click", () => {
+        currentLang = currentLang === "ar" ? "en" : "ar";
+        updateLanguage(currentLang);
+      });
+
+      updateLanguage(currentLang);
+
+      tsParticles.load("tsparticles", {
+        background: { color: { value: "#f4f9ff" } },
+        fpsLimit: 60,
+        particles: {
+          number: { value: 100, density: { enable: true, value_area: 800 } },
+          color: { value: "#0077b6" },
+          shape: { type: "circle" },
+          opacity: { value: 0.6 },
+          size: { value: { min: 1, max: 3 } },
+          move: {
+            enable: true,
+            speed: 0.5,
+            direction: "none",
+            outMode: "bounce",
+          },
+        },
+        interactivity: {
+          events: {
+            onHover: { enable: true, mode: "repulse" },
+            onClick: { enable: true, mode: "push" },
+          },
+          modes: {
+            repulse: { distance: 90 },
+            push: { quantity: 4 },
+          },
+        },
+        detectRetina: true,
+      });
+
+      const logo = document.querySelector(".logo");
+      logo.style.transition = "color 1.5s ease-in-out";
+      setInterval(() => {
+        logo.style.color =
+          logo.style.color === "rgb(0, 119, 182)" ? "#3aff00" : "#0077b6";
+      }, 2000);
+
+      const sections = document.querySelectorAll(
+        "section, .hero-text, form#contact-form"
+      );
+
+      function checkVisibility() {
+        const triggerBottom = window.innerHeight * 0.85;
+
+        sections.forEach((section) => {
+          const rect = section.getBoundingClientRect();
+          if (rect.top < triggerBottom) {
+            section.classList.add("visible");
+          }
+        });
+      }
+
+      window.addEventListener("scroll", checkVisibility);
+      window.addEventListener("load", checkVisibility);
+    </script>
+  </body>
+</html>
